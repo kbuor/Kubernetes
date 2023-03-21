@@ -1,18 +1,12 @@
-# Create K8s Cluster
-# Prepare for bs
-# Turnoff firewall
+# Install binary
 
-systemctl stop firewalld
-systemctl disable --now firewalld
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
-# Disable SElinux.
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs)stable"
 
-vi /etc/sysconfig/selinux
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+cat << EOF | tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
 
-# Install VMware Tool
-
-yum install -y open-vm-tools
-
-# Update
-
-yum update -y
+apt-get update
