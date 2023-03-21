@@ -1,1 +1,18 @@
 # Create K8s Cluster
+# Prepare for bs
+# Turnoff firewall
+
+systemctl stop firewalld
+systemctl disable --now firewalld
+
+# Disable SElinux.
+
+vi /etc/sysconfig/selinux
+
+# Install VMware Tool
+
+yum install -y open-vm-tools
+
+# Update
+
+yum update -y
