@@ -31,3 +31,6 @@ swapoff -a
 
 # Bootstraping master node
 kubeadm init --pod-network-cidr=192.19.0.0/16
+
+# Apply overlay networking
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
