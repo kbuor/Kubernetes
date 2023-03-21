@@ -12,3 +12,16 @@ deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
 apt-get update
+
+apt-get install -y \
+docker \
+kubelet=1.17.8-00 \
+kubeadm=1.17.8-00 kubectl=1.17.8-00
+
+apt-mark hold docker kubelet kubeadm
+
+systemctl enable kubelet
+
+kubeadm init --ignore-preflight-errors=NumCPU \
+--apiserver-advertise-address=10.10.10.27 \
+--pod-network-cidr=10.244.0.0/16
