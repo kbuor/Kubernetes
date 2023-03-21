@@ -16,7 +16,7 @@ apt-get update
 
 # Install Kubernetes component
 apt-get install -y \
-docker \
+docker.io \
 kubelet=1.17.8-00 \
 kubeadm=1.17.8-00 kubectl=1.17.8-00
 
@@ -29,7 +29,5 @@ systemctl enable kubelet
 # Disable Swap
 swapoff -a
 
-# Bootstrapping master node
-kubeadm init --ignore-preflight-errors=NumCPU \
---apiserver-advertise-address=10.10.10.27 \
---pod-network-cidr=10.244.0.0/16
+# Bootstraping master node
+kubeadm init --pod-network-cidr=192.19.0.0/16
