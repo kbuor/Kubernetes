@@ -26,6 +26,9 @@ apt-mark hold docker kubelet kubeadm
 # Start and Enable kubernetes service
 systemctl enable kubelet
 
+# Disable Swap
+swapoff -a
+
 # Bootstrapping master node
 kubeadm init --ignore-preflight-errors=NumCPU \
 --apiserver-advertise-address=10.10.10.27 \
