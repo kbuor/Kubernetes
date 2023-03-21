@@ -1,27 +1,32 @@
-# Install binary
-
+# Prepare for all node
+# Add GPG key for Docker repo
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
+# Add GPG key for Kubernetes repo
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 cat << EOF | tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 
+# Update Repo
 apt-get update
 
+# Install Kubernetes component
 apt-get install -y \
 docker \
 kubelet=1.17.8-00 \
 kubeadm=1.17.8-00 kubectl=1.17.8-00
 
+# Hold Kubernetes version
 apt-mark hold docker kubelet kubeadm
 
+# Start and Enable kubernetes service
 systemctl enable kubelet
 
+# Bootstrapping master node
 kubeadm init --ignore-preflight-errors=NumCPU \
 --apiserver-advertise-address=10.10.10.27 \
 --pod-network-cidr=10.244.0.0/16
