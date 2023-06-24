@@ -20,7 +20,7 @@ apt upgrade -y
 swapoff -a
 ```
 
-### Install Dependency
+### II. Install Dependency
 
 - Docker
 - Kubeadm
