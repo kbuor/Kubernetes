@@ -60,3 +60,8 @@ apt-mark hold docker kubelet kubeadm
 ```
 systemctl enable kubelet
 ```
+### Bootstraping Master
+- Bootstraping master using `kubeadm`
+```
+kubeadm init --pod-network-cidr=192.168.0.0/16
+```
