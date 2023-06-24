@@ -48,3 +48,15 @@ EOF
 ```
 apt update -y
 ```
+- Install dependency components
+```
+apt install -y docker.io kubelet kubeadm kubectl
+```
+- Hold Kubernetes components version
+```
+apt-mark hold docker kubelet kubeadm
+```
+- Enable `kubelet` service
+```
+systemctl enable kubelet
+```
