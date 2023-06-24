@@ -2,11 +2,11 @@
 Use Kubeadm to bootstraping a Kubernetes cluster
 
 ## Tasks list
-- [ ] Prepare linux
-- [ ] Install Dependancy
-- [ ] Bootstraping Master using Kubeadm
+- [ ] I. Prepare linux
+- [ ] II. Install Dependancy
+- [ ] III. Bootstraping Master using Kubeadm
 
-### Prepare Linux
+### I. Prepare Linux
 
 - Update linux repository
 
