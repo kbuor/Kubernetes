@@ -60,8 +60,13 @@ apt-mark hold docker kubelet kubeadm
 ```
 systemctl enable kubelet
 ```
-### Bootstraping Master
+### III. Bootstraping Master
 - Bootstraping master using `kubeadm`
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
+```
+- Apply overlay networking
+```
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
 ```
