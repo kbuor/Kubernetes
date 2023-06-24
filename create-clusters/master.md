@@ -1,5 +1,5 @@
 # Deploy Master
-Use Kubeadm to bootstraping a Kubernetes cluster
+Use Kubeadm to bootstraping a Kubernetes cluster `rgb(9, 105, 218)`
 
 ## Tasks list
 - [x] I. Prepare linux
