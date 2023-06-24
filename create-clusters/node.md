@@ -61,4 +61,4 @@ apt-mark hold docker kubelet kubeadm
 systemctl enable kubelet
 ```
 ### III. Join Node to Master
-
+> Run the join command. This command can be find by `kubeadm token create --print-join-command` command run from master.
