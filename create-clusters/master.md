@@ -1,6 +1,9 @@
 # Create Master
 Use Kubeadm to bootstraping a Kubernetes cluster
 
+## Task list
+- [ ] Prepare linux 
+
 ## Prepare Linux
 
 ### Install Dependency
@@ -9,7 +12,7 @@ Use Kubeadm to bootstraping a Kubernetes cluster
 - Kubeadm
 - Kubelet
 
-* Note for Centos:
+- Note for Centos:
 
 - Disable SELINUX
 - Disable swap
