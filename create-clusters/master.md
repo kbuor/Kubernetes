@@ -1,6 +1,5 @@
 # Deploy Master
-Use Kubeadm to bootstraping a Kubernetes cluster
-
+Deploy new Kubernetes Cluster using `kubeadm`
 ## Tasks list
 - [x] I. Prepare linux
 - [x] II. Install Dependancy
