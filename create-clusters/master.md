@@ -15,6 +15,10 @@ apt update -y
 ```
 apt upgrade -y
 ```
+- Disable Swap
+```
+swapoff -a
+```
 
 ### Install Dependency
 
