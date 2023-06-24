@@ -8,3 +8,9 @@ Use Kubeadm to bootstraping a Kubernetes cluster
 - Docker
 - Kubeadm
 - Kubelet
+
+* Note for Centos:
+
+- Disable SELINUX
+- Disable swap
+- Disable firewalld
