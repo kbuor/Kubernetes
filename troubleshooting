@@ -1,4 +1,0 @@
-sudo -i
-swapoff -a
-exit
-strace -eopenat kubectl version
