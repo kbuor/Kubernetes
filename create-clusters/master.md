@@ -9,6 +9,10 @@ Use Kubeadm to bootstraping a Kubernetes cluster
 ### I. Prepare Linux
 
 - Update linux repository
+```
+apt update -y
+apt upgrade -y
+```
 
 ### Install Dependency
 
