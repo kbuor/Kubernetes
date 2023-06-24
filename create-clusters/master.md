@@ -77,3 +77,20 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
 ```
+## Optional command
+- Get node information
+```
+kubectl get nodes
+```
+- Get node health
+```
+kubectl get componentstatuses
+```
+- Get system pods status
+```
+kubectl get pods --all-namespace
+```
+- Show join command
+```
+kubeadm token create --print-join-command
+```
