@@ -11,6 +11,8 @@ Use Kubeadm to bootstraping a Kubernetes cluster
 - Update linux repository
 ```
 apt update -y
+```
+```
 apt upgrade -y
 ```
 
