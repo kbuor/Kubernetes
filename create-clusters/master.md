@@ -1,4 +1,4 @@
-# Create Master
+# Deploy Master
 Use Kubeadm to bootstraping a Kubernetes cluster
 
 ## Tasks list
