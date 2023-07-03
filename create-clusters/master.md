@@ -86,7 +86,7 @@ kubectl get componentstatuses
 ```
 - Get system pods status
 ```
-kubectl get pods --all-namespace
+kubectl get pods --all-namespaces
 ```
 - Show join command
 ```
