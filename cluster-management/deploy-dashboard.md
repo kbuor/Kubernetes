@@ -1,9 +1,30 @@
-> Check current version of `kubeadm`
+# Deploy Kubernetes Dashboard
+Deploy the dashboard for kubernetes
+> Ref. Link: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+## Tasks list
+- [x] I. Prepare linux
+- [x] II. Install Dependancy
+- [x] III. Bootstraping Master using Kubeadm
+
+### I. Prepare Linux
+
+- Update linux repository
 ```
-kubeadm version -o short
+apt update -y
+apt upgrade -y
+```
+- Disable Swap
+```
+swapoff -a
 ```
 
-> Check current version of `kubectl` `api & master components`
+### II. Install Dependency
+
+> Dependency need to install: docker, kubeadm, kubelet
+
+- Add GPG key for Docker repository
 ```
-kubectl version --short
+apt-get install ca-certificates curl gnupg lsb-release
+sudo mkdir -m 0755 -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
