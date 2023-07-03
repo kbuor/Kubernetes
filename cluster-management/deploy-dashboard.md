@@ -2,9 +2,9 @@
 Deploy the dashboard for kubernetes
 > Ref. Link: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 ## Tasks list
-- [x] I. Prepare linux
-- [x] II. Install Dependancy
-- [x] III. Bootstraping Master using Kubeadm
+- [x] I. Deploy Dashboard UI
+- [x] II. Create SSL Certificates
+- [x] III. Create user and get token
 
 ### I. Deploying the dashboard UI
 
