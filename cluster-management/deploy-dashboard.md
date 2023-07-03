@@ -6,25 +6,14 @@ Deploy the dashboard for kubernetes
 - [x] II. Install Dependancy
 - [x] III. Bootstraping Master using Kubeadm
 
-### I. Prepare the manifest for deployment
+### I. Deploying the dashboard UI
 
-- Update linux repository
+> Download the dashboard.yaml manifest
 ```
-apt update -y
-apt upgrade -y
-```
-- Disable Swap
-```
-swapoff -a
+wget https://github.com/kbuor/Kubernetes/blob/main/manifest/dashboard.yaml
 ```
 
-### II. Install Dependency
-
-> Dependency need to install: docker, kubeadm, kubelet
-
-- Add GPG key for Docker repository
+> Create the workload and services
 ```
-apt-get install ca-certificates curl gnupg lsb-release
-sudo mkdir -m 0755 -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+kubectl apply -f dashboard.yaml
 ```
