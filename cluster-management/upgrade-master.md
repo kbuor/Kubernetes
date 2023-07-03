@@ -9,7 +9,7 @@ Upgrade the Master using `kubeadm`
 
 ### I. Upgrade `kubeadm` package
 
-- Upgrade `kubeadm` package
+> Upgrade `kubeadm` package
 ```
 apt-mark unhole kubeadm
 apt install -y kubeadm=1.27.3-00
@@ -20,12 +20,18 @@ apt-mark hole kubeadm
 
 > Check upgrade plan using `kubeadm`: docker, kubeadm, kubelet
 
-- Add GPG key for Docker repository
 ```
-apt-get install ca-certificates curl gnupg lsb-release
-sudo mkdir -m 0755 -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+kubeadm upgrade plan
 ```
+
+### III. Upgrade Master and Components
+
+> Run the recommand command receive from upgrade plan
+
+```
+kubeadm apply plan
+```
+
 - Add Docker repository
 ```
 echo \
