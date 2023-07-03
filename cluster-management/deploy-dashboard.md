@@ -6,7 +6,7 @@ Deploy the dashboard for kubernetes
 - [x] II. Install Dependancy
 - [x] III. Bootstraping Master using Kubeadm
 
-### I. Prepare Linux
+### I. Prepare the manifest for deployment
 
 - Update linux repository
 ```
