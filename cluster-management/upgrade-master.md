@@ -7,17 +7,18 @@ Upgrade the Master using `kubeadm`
 - [x] IV. Upgrade `kubelet` package
 - [x] V. Upgrade `kubectl` package
 
-### I. Prepare Linux
+### I. Upgrade `kubeadm` package
 
 - Upgrade `kubeadm` package
 ```
 apt-mark unhole kubeadm
 apt install -y kubeadm=1.27.3-00
+apt-mark hole kubeadm
 ```
 
-### II. Install Dependency
+### II. Check upgrade plan
 
-> Dependency need to install: docker, kubeadm, kubelet
+> Check upgrade plan using `kubeadm`: docker, kubeadm, kubelet
 
 - Add GPG key for Docker repository
 ```
