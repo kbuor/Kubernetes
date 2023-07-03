@@ -9,14 +9,10 @@ Upgrade the Master using `kubeadm`
 
 ### I. Prepare Linux
 
-- Update linux repository
+- Upgrade `kubeadm` package
 ```
-apt update -y
-apt upgrade -y
-```
-- Disable Swap
-```
-swapoff -a
+apt-mark unhole kubeadm
+apt install -y kubeadm=1.27.3-00
 ```
 
 ### II. Install Dependency
