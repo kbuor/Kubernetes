@@ -7,6 +7,17 @@ Upgrade the Master using `kubeadm`
 - [x] IV. Upgrade `kubelet` package
 - [x] V. Upgrade `kubectl` package
 
+> Check current version of `kubeadm`
+```
+kubeadm version -o short
+```
+
+> Check current version of `kubectl` `api & master components`
+```
+kubectl version --short
+```
+
+
 ### I.  Upgrade `kubeadm` package
 
 > Upgrade `kubeadm` package
@@ -48,4 +59,14 @@ apt-mark hole kubelet
 apt-mark unhole kubectl
 apt install -y kubeadm=1.27.3-00
 apt-mark hole kubectl
+```
+
+> Check current version of `kubeadm`
+```
+kubeadm version -o short
+```
+
+> Check current version of `kubectl` `api & master components`
+```
+kubectl version --short
 ```
