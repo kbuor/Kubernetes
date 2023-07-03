@@ -47,3 +47,8 @@ kubectl apply -f cluster-role-binding.yaml
 ```
 kubectl -n kubernetes-dashboard create token admin-user
 ```
+
+> (Optional) Install K9s
+```
+curl -sS https://webinstall.dev/k9s | bash
+```
