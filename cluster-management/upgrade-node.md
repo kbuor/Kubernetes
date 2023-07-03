@@ -7,6 +7,17 @@ Upgrade the Master by upgrade `kubelet`
 - [x] IV. Upgrade `kubectl` package
 - [x] V. UnCordon the Node
 
+
+> Check current version of `kubeadm`
+```
+kubeadm version -o short
+```
+
+> Check current version of `kubectl` `api & master components`
+```
+kubectl version --short
+```
+
 ### I.  Cordon the Node
 
 > Cordon the Node using `kubectl` command
@@ -45,4 +56,13 @@ apt-mark hole kubectl
 > UnCordon the Node using `kubectl` command
 ```
 kubectl uncordon node k8s-node-01
+```
+> Check current version of `kubeadm`
+```
+kubeadm version -o short
+```
+
+> Check current version of `kubectl` `api & master components`
+```
+kubectl version --short
 ```
