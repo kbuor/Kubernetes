@@ -37,18 +37,18 @@ kubectl drain k8s-node-01
 
 > Upgrade `kubelet` package
 ```
-apt-mark unhole kubelet
+apt-mark unhold kubelet
 apt install -y kubeadm=1.27.3-00
-apt-mark hole kubelet
+apt-mark hold kubelet
 ```
 
 ### IV.  Upgrade `kubectl` package
 
 > Upgrade `kubectl` package
 ```
-apt-mark unhole kubectl
+apt-mark unhold kubectl
 apt install -y kubeadm=1.27.3-00
-apt-mark hole kubectl
+apt-mark hold kubectl
 ```
 
 ### V.  UnCordon the Node
