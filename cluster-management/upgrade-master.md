@@ -22,9 +22,9 @@ kubectl version --short
 
 > Upgrade `kubeadm` package
 ```
-apt-mark unhole kubeadm
+apt-mark unhold kubeadm
 apt install -y kubeadm=1.27.3-00
-apt-mark hole kubeadm
+apt-mark hold kubeadm
 ```
 
 ### II.  Check upgrade plan
@@ -47,18 +47,18 @@ kubeadm apply plan
 
 > Upgrade `kubelet` package
 ```
-apt-mark unhole kubelet
+apt-mark unhold kubelet
 apt install -y kubeadm=1.27.3-00
-apt-mark hole kubelet
+apt-mark hold kubelet
 ```
 
 ### IV.  Upgrade `kubectl` package
 
 > Upgrade `kubectl` package
 ```
-apt-mark unhole kubectl
+apt-mark unhold kubectl
 apt install -y kubeadm=1.27.3-00
-apt-mark hole kubectl
+apt-mark hold kubectl
 ```
 
 > Check current version of `kubeadm`
