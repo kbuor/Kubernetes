@@ -1,6 +1,6 @@
 # Demo Creating and accessing Secrets
 
-- Generic - Create a secret from a local file, directory or literal value
+> Generic - Create a secret from a local file, directory or literal value
 They keys and values are case sensitive
 
 ```
