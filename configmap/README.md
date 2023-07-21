@@ -2,13 +2,13 @@
 
 ## Creating ConfigMaps
 
-- Create a PROD ConfigMap
+> Create a PROD ConfigMap
 
 ```shell
 kubectl create configmap appconfigprod --from-literal=DATABASE_SERVERNAME=sql.example.local --from-literal=BACKEND_SERVERNAME=be.example.local
 ```
 
-- Create a QA ConfigMap
+> Create a QA ConfigMap
 We can source our ConfigMap from files or from directories
 If no key, then the base name of the file
 Otherwise we can specify a key name to allow for more complex app configs and access to specific configuration elements more appconfigqa
