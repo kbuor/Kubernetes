@@ -1,8 +1,8 @@
 # Investigating k8s networking
 
-Get all Nodes and their IP information, INTERNAL-IP is the real IP of the Node
+> Get all Nodes and their IP information, INTERNAL-IP is the real IP of the Node
 
-```
+```shell
 kubectl get nodes -o wide
 
 NAME          STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
@@ -11,16 +11,16 @@ k8s-node-01   Ready    <none>          8d    v1.27.3   10.236.0.11   <none>     
 k8s-node-02   Ready    <none>          8d    v1.27.3   10.236.0.12   <none>        Ubuntu 20.04.6 LTS   5.4.0-153-generic   containerd://1.6.12
 ```
 
-Deploy a basic workload, hello-world with 3 replicas.
+> Deploy a basic workload, hello-world with 3 replicas.
 
-```
+```shell
 kubectl apply -f Deployment.yaml
 ```
 
 
-Verify if a pod has its unique IP address
+> Verify if a pod has its unique IP address
 
-```
+```shell
 kubectl get pods -o wide
 
 NAME                           READY   STATUS    RESTARTS   AGE   IP                NODE          NOMINATED NODE   READINESS GATES
@@ -29,9 +29,9 @@ hello-world-75d6d8cfd7-p2559   1/1     Running   0          44m   192.168.44.215
 hello-world-75d6d8cfd7-qlzjw   1/1     Running   0          44m   192.168.154.244   k8s-node-01   <none>           <none>
 ```
 
-Access to pod shell and check its networking configuration
+> Access to pod shell and check its networking configuration
 
-```
+```shell
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -48,9 +48,9 @@ Access to pod shell and check its networking configuration
 
 ```
 
-SSH to the worker node and check the network information
+> SSH to the worker node and check the network information
 
-```
+```shell
 ip a
 
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -89,9 +89,9 @@ ip a
        valid_lft forever preferred_lft forever
 ```
 
-Check Route
+> Check Route
 
-```
+```shell
 route
 
 Kernel IP routing table
@@ -107,38 +107,38 @@ default         _gateway        0.0.0.0         UG    0      0        0 ens160
 192.168.235.192 k8s-master      255.255.255.192 UG    0      0        0 ens160   
 ```
 
-Exploring cluster DNS
-Get k8s service in kube-system
+> Exploring cluster DNS
+> Get k8s service in kube-system
 
-```
+```shell
 kubectl get service --namespace kube-system
 
 NAME       TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)                  AGE
 kube-dns   ClusterIP   10.96.0.10   <none>        53/UDP,53/TCP,9153/TCP   8d      
 ```
 
-Get detail info about CoreDNS deployment
+> Get detail info about CoreDNS deployment
 
-```
+```shell
 kubectl describe deployment coredns --namespace kube-system
 ```
 
-Discover the CoreDNS configuration and default forwarder
+> Discover the CoreDNS configuration and default forwarder
 
-```
+```shell
 kubectl get configmaps --namespace kube-system coredns -o yaml
 ```
 
-Configure Pod DNS client Configuration
+> Configure Pod DNS client Configuration
 
-```
+```shell
 kubectl apply -f DeploymentCustomDns.yaml
 ```
 
 
-Check the DNS configuration of the normal pod and custom pod
+> Check the DNS configuration of the normal pod and custom pod
 
-```
+```shell
 
 kubectl exec -it 'CUSTOM_PODNAME' -- cat /etc/resolv.conf
 nameserver 9.9.9.9
@@ -149,11 +149,11 @@ search default.svc.cluster.local svc.cluster.local cluster.local
 options ndots:
 ```
 
-DNS discovering
+> DNS discovering
 
-Run a busybox pod in the same namespace and test DNS resolving
+> Run a busybox pod in the same namespace and test DNS resolving
 
-```
+```shell
 kubectl run -it --rm bb --image busybox -- bin/sh
 / # nslookup hello-world
 Server:         10.96.0.10
@@ -167,13 +167,13 @@ Name:   hello-world.default.svc.cluster.local
 Address: 10.102.161.178
 ```
 
-Run another busybox pod in a different namespace
+> Run another busybox pod in a different namespace
 
-```
+```shell
 kubectl create ns myns
 ```
 
-```
+```shell
 kubectl run -n myns -it --rm bb1 --image busybox -- bin/sh
 / # nslookup hello-world
 / # nslookup hello-world
@@ -194,7 +194,7 @@ Address:        10.96.0.10:53
 
 ** server can't find hello-world.myns.svc.cluster.local: NXDOMAIN
 ```
-```
+```shell
 / # nslookup hello-world.default.svc.cluster.local
 Server:         10.96.0.10
 Address:        10.96.0.10:53
