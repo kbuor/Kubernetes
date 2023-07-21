@@ -4,7 +4,7 @@
 
 - Create a PROD ConfigMap
 
-```yaml
+```shell
 kubectl create configmap appconfigprod --from-literal=DATABASE_SERVERNAME=sql.example.local --from-literal=BACKEND_SERVERNAME=be.example.local
 ```
 
@@ -13,13 +13,13 @@ We can source our ConfigMap from files or from directories
 If no key, then the base name of the file
 Otherwise we can specify a key name to allow for more complex app configs and access to specific configuration elements more appconfigqa
 
-```yaml
+```shell
 kubectl create configmap appconfigqa --from-file=appconfigqa
 ```
 
 - Each creation method yeilded a different structure in the ConfigMap
 
-```yaml
+```shell
 kubectl get configmap appconfigprod -o yaml
 kubectl get configmap appconfigqa -o yaml
 ```
