@@ -1,7 +1,7 @@
 # Deploy Master
 ## Prepare Linux
 - Update linux repository
-```
+```yaml
 apt update -y
 apt upgrade -y
 ```
