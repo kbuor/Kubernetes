@@ -51,7 +51,7 @@ apt-mark hold docker kubelet kubeadm
 ```
 systemctl enable kubelet
 ```
-### III. Bootstraping Master
+## Bootstraping Master
 - Bootstraping master using `kubeadm`
 ```
 kubeadm init --pod-network-cidr=192.168.0.0/16
@@ -88,14 +88,8 @@ kubeadm token create --print-join-command
 --------------
 
 # Deploy Node
-Use Kubeadm to bootstraping a Kubernetes cluster
 
-## Tasks list
-- [x] I. Prepare linux
-- [x] II. Install Dependancy
-- [x] III. Join Node to Master
-
-### I. Prepare Linux
+## Prepare Linux
 
 - Update linux repository
 ```
@@ -107,7 +101,7 @@ apt upgrade -y
 swapoff -a
 ```
 
-### II. Install Dependency
+## Install Dependency
 
 > Dependency need to install: docker, kubeadm, kubelet
 
@@ -149,7 +143,7 @@ apt-mark hold docker kubelet kubeadm
 ```
 systemctl enable kubelet
 ```
-### III. Join Node to Master
+## Join Node to Master
 > Run the join command. This command can be find by `kubeadm token create --print-join-command` command run from master.
 
 
@@ -158,12 +152,8 @@ systemctl enable kubelet
 # Deploy Kubernetes Dashboard
 Deploy the dashboard for kubernetes
 > Ref. Link: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
-## Tasks list
-- [x] I. Deploy Dashboard UI
-- [x] II. Create SSL Certificates
-- [x] III. Create user and get token
 
-### I. Deploying the dashboard UI
+## Deploying the dashboard UI
 
 > Download the dashboard.yaml manifest
 ```
@@ -175,7 +165,7 @@ wget https://raw.githubusercontent.com/kbuor/Kubernetes/main/manifest/dashboard.
 kubectl apply -f dashboard.yaml
 ```
 
-### II. Create `kubernetes-dashboard-certs`
+## Create `kubernetes-dashboard-certs`
 > Using OpenSSL to generate SSL self-Certificate
 ```
 mkdir certs
@@ -189,7 +179,7 @@ openssl x509 -req -sha256 -days 365 -in certs/dashboard.csr -signkey certs/dashb
 kubectl create secret generic kubernetes-dashboard-certs --from-file=certs -n kubernetes-dashboard
 ```
 
-### III. Create User and Get Token to Login
+## Create User and Get Token to Login
 > Create Service Account
 ```
 wget https://raw.githubusercontent.com/kbuor/Kubernetes/main/manifest/service-account.yaml
