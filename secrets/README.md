@@ -1,7 +1,7 @@
 # Demo Creating and accessing Secrets
 
 > Generic - Create a secret from a local file, directory or literal value
-They keys and values are case sensitive
+> They keys and values are case sensitive
 
 ```
 kubectl create secret generic app1 --from-literal=USERNAME=app1login --from-literal=PASSWORD='S0methingS@Str0ng!'
