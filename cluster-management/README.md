@@ -1,12 +1,5 @@
 # Deploy Master
-Deploy new Kubernetes Cluster using `kubeadm`
-## Tasks list
-- [x] I. Prepare linux
-- [x] II. Install Dependancy
-- [x] III. Bootstraping Master using Kubeadm
-
-### I. Prepare Linux
-
+## Prepare Linux
 - Update linux repository
 ```
 apt update -y
@@ -16,8 +9,7 @@ apt upgrade -y
 ```
 swapoff -a
 ```
-
-### II. Install Dependency
+## Install Dependency
 
 > Dependency need to install: docker, kubeadm, kubelet
 
