@@ -14,7 +14,7 @@ swapoff -a
 > Dependency need to install: docker, kubeadm, kubelet
 
 - Add GPG key for Docker repository
-```yaml
+```shell
 apt-get install ca-certificates curl gnupg lsb-release
 sudo mkdir -m 0755 -p /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
