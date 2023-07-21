@@ -42,7 +42,7 @@ echo $(kubectl get secret app1 --template={{.data.PASSWORD}} | base64 --decode )
 kubectl apply -f deployment-secrets-env.yaml
 ```
 
-```
+```shell
 PODNAME=$(kubectl get pods | grep hello-world-secrets-env | awk '{print $1}' | head -n 1)
 echo $PODNAME
 ```
