@@ -1,4 +1,4 @@
-# POD
+# Pod
 
 > Start up kubectl get events --watch to monitor the cluster events in a separate terminal
 
@@ -107,7 +107,7 @@ ctrl+c
 kubectl delete pod multicontainer-pod
 ```
 ----------------
-# POD Lifecycel
+# Pod Lifecycel
 
 > Start up kubectl get events --watch and background it
 
