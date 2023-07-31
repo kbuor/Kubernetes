@@ -4,7 +4,7 @@ This tutorial leverages GCP to streamline provisioning of the compute infrastruc
 
 ## Google Cloud Platform SDK
 
-###Install the Google Cloud SDK
+### Install the Google Cloud SDK
 
 Follow the Google Cloud SDK  to install and configure the gcloud command line utility.
 
