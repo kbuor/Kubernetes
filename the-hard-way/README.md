@@ -1,14 +1,14 @@
 # Prerequisites
 
-This tutorial leverages GCP to streamline provisioning of the compute infrastructure required to bootstrap a Kubernetes cluster from the ground up. Sign up for $300 in free credits.
+> This tutorial leverages GCP to streamline provisioning of the compute infrastructure required to bootstrap a Kubernetes cluster from the ground up. Sign up for $300 in free credits.
 
 ## Google Cloud Platform SDK
 
 ### Install the Google Cloud SDK
 
-Follow the Google Cloud SDK  to install and configure the gcloud command line utility.
+> Follow the Google Cloud SDK  to install and configure the gcloud command line utility.
 
-Verify the Google Cloud SDK version is 301.0.0 or higher:
+> Verify the Google Cloud SDK version is 301.0.0 or higher:
 
 ```shell
 $ ./google-cloud-sdk/install.sh
