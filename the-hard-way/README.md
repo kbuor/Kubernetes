@@ -20,7 +20,8 @@ core 2020.07.17
 gsutil 4.52
 ```
 
-Set a Default Compute Region and Zone
+### Set a Default Compute Region and Zone
+```shell
 $ gcloud init
 ​
 Welcome! This command will take you through the configuration of gcloud.
@@ -49,13 +50,29 @@ Please enter numeric choice or text value (must exactly match list
 item):  2
 ​
 Your current project has been set to: [kubernetes-the-hard-way-284615].
-Then be sure to authorize gcloud to access the Cloud Platform with your Google user credentials:
+```
+
+> Then be sure to authorize gcloud to access the Cloud Platform with your Google user credentials:
+
+```shell
 gcloud auth login
-Next set a default compute region and compute zone that is near your place:
+```
+
+> Next set a default compute region and compute zone that is near your place:
+
+```shell
 gcloud config set compute/region asia-southeast1
-Set a default compute zone:
+```
+
+> Set a default compute zone:
+
+```shell
 gcloud config set compute/zone asia-southeast1-c
-Verification:
+```
+
+> Verification:
+
+```shell
 $ gcloud config list
 ​
 [compute]
@@ -67,13 +84,6 @@ disable_usage_reporting = False
 project = kubernetes-the-hard-way-284615
 ​
 Your active configuration is: [default]
-Use the gcloud compute zones list command to view additional regions and zones.
-​
-Running Commands in Parallel with tmux
-​ can be used to run commands on multiple compute instances at the same time. Labs in this tutorial may require running the same commands across multiple compute instances, in those cases consider using tmux and splitting a window into multiple panes with synchronize-panes enabled to speed up the provisioning process.
-​
-Install tmux with homebrew:
-brew install tmux
-​
-The use of tmux is optional and not required to complete this tutorial
-Enable synchronize-panes by pressing ctrl+b followed by shift+:. Next type set synchronize-panes on at the prompt. To disable synchronization: set synchronize-panes off.
+```
+
+> Use the gcloud compute zones list command to view additional regions and zones.
