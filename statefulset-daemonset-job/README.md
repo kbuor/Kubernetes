@@ -1,6 +1,6 @@
 # DaemonSet
 
-##  Demo 1 - Creating a DaemonSet on All Nodes
+## Creating a DaemonSet on All Nodes
 
 > We get one Pod per Node to run network services on that Node
 
@@ -57,7 +57,7 @@ kubectl delete pods $MYPOD
 ```
 
 
-## Demo 2 - Creating a DaemonSet on a Subset of Nodes
+## Creating a DaemonSet on a Subset of Nodes
 
 > Let's create a DaemonSet with a defined nodeSelector
 
@@ -102,7 +102,7 @@ kubectl delete daemonsets hello-world-ds
 ```
 
 
-## Demo 3 - Updating a DaemonSet
+## Updating a DaemonSet
 
 ```shell
 kubectl apply -f DaemonSet.yaml
@@ -148,7 +148,7 @@ kubectl delete daemonsets hello-world-ds
 -----------
 # JobsCronJobs
 
-## Demo 1 - Executing tasks with Jobs, check out the file job.yaml
+## Executing tasks with Jobs, check out the file job.yaml
 
 > Ensure you define a restartPolicy, the default of a Pod is Always, which is not compatible with a Job. We'll need OnFailure or Never, let's look at OnFailure
 
@@ -195,7 +195,7 @@ kubectl get pods
 
 
 
-## Demo 2 - Show restartPolicy in action..., check out backoffLimit: 2 and restartPolicy: Never
+## Show restartPolicy in action..., check out backoffLimit: 2 and restartPolicy: Never
 
 > We'll want to use Never so our pods aren't deleted after backoffLimit is reached.
 
@@ -236,7 +236,7 @@ kubectl get pods
 ```
 
 
-## Demo 3 - Defining a Parallel Job
+## Defining a Parallel Job
 
 ```shell
 kubectl apply -f ParallelJob.yaml
@@ -270,7 +270,7 @@ kubectl delete job hello-world-job-parallel
 
 
 
-## Demo 5 - Scheduling tasks with CronJobs
+## Scheduling tasks with CronJobs
 
 ```shell
 kubectl apply -f CronJob.yaml
