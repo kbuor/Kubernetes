@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: ro-operator-secret
-  annotations:
-    kubernetes.io/service-account.name: ro-operator
-type: kubernetes.io/service-account-token
