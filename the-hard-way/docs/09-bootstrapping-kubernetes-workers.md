@@ -6,7 +6,7 @@ In this lab you will bootstrap three Kubernetes worker nodes. The following comp
 
 The commands in this lab must be run on each worker instance: `worker-0`, `worker-1`, and `worker-2`. Login to each worker instance using the `gcloud` command. Example:
 
-```
+```shell
 gcloud compute ssh worker-0
 ```
 
@@ -18,7 +18,7 @@ gcloud compute ssh worker-0
 
 Install the OS dependencies:
 
-```
+```shell
 {
   sudo apt-get update
   sudo apt-get -y install socat conntrack ipset
@@ -33,13 +33,13 @@ By default the kubelet will fail to start if [swap](https://help.ubuntu.com/comm
 
 Verify if swap is enabled:
 
-```
+```shell
 sudo swapon --show
 ```
 
 If output is empthy then swap is not enabled. If swap is enabled run the following command to disable swap immediately:
 
-```
+```shell
 sudo swapoff -a
 ```
 
@@ -47,7 +47,7 @@ sudo swapoff -a
 
 ### Download and Install Worker Binaries
 
-```
+```shell
 wget -q --show-progress --https-only --timestamping \
   https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.21.0/crictl-v1.21.0-linux-amd64.tar.gz \
   https://github.com/opencontainers/runc/releases/download/v1.0.0-rc93/runc.amd64 \
@@ -60,7 +60,7 @@ wget -q --show-progress --https-only --timestamping \
 
 Create the installation directories:
 
-```
+```shell
 sudo mkdir -p \
   /etc/cni/net.d \
   /opt/cni/bin \
@@ -72,7 +72,7 @@ sudo mkdir -p \
 
 Install the worker binaries:
 
-```
+```shell
 {
   mkdir containerd
   tar -xvf crictl-v1.21.0-linux-amd64.tar.gz
@@ -89,14 +89,14 @@ Install the worker binaries:
 
 Retrieve the Pod CIDR range for the current compute instance:
 
-```
+```shell
 POD_CIDR=$(curl -s -H "Metadata-Flavor: Google" \
   http://metadata.google.internal/computeMetadata/v1/instance/attributes/pod-cidr)
 ```
 
 Create the `bridge` network configuration file:
 
-```
+```json
 cat <<EOF | sudo tee /etc/cni/net.d/10-bridge.conf
 {
     "cniVersion": "0.4.0",
@@ -118,7 +118,7 @@ EOF
 
 Create the `loopback` network configuration file:
 
-```
+```json
 cat <<EOF | sudo tee /etc/cni/net.d/99-loopback.conf
 {
     "cniVersion": "0.4.0",
@@ -132,11 +132,11 @@ EOF
 
 Create the `containerd` configuration file:
 
-```
+```shell
 sudo mkdir -p /etc/containerd/
 ```
 
-```
+```toml
 cat << EOF | sudo tee /etc/containerd/config.toml
 [plugins]
   [plugins.cri.containerd]
@@ -150,7 +150,7 @@ EOF
 
 Create the `containerd.service` systemd unit file:
 
-```
+```toml
 cat <<EOF | sudo tee /etc/systemd/system/containerd.service
 [Unit]
 Description=containerd container runtime
@@ -176,7 +176,7 @@ EOF
 
 ### Configure the Kubelet
 
-```
+```shell
 {
   sudo mv ${HOSTNAME}-key.pem ${HOSTNAME}.pem /var/lib/kubelet/
   sudo mv ${HOSTNAME}.kubeconfig /var/lib/kubelet/kubeconfig
@@ -186,7 +186,7 @@ EOF
 
 Create the `kubelet-config.yaml` configuration file:
 
-```
+```yaml
 cat <<EOF | sudo tee /var/lib/kubelet/kubelet-config.yaml
 kind: KubeletConfiguration
 apiVersion: kubelet.config.k8s.io/v1beta1
@@ -214,7 +214,7 @@ EOF
 
 Create the `kubelet.service` systemd unit file:
 
-```
+```toml
 cat <<EOF | sudo tee /etc/systemd/system/kubelet.service
 [Unit]
 Description=Kubernetes Kubelet
@@ -242,13 +242,13 @@ EOF
 
 ### Configure the Kubernetes Proxy
 
-```
+```shell
 sudo mv kube-proxy.kubeconfig /var/lib/kube-proxy/kubeconfig
 ```
 
 Create the `kube-proxy-config.yaml` configuration file:
 
-```
+```yaml
 cat <<EOF | sudo tee /var/lib/kube-proxy/kube-proxy-config.yaml
 kind: KubeProxyConfiguration
 apiVersion: kubeproxy.config.k8s.io/v1alpha1
@@ -261,7 +261,7 @@ EOF
 
 Create the `kube-proxy.service` systemd unit file:
 
-```
+```toml
 cat <<EOF | sudo tee /etc/systemd/system/kube-proxy.service
 [Unit]
 Description=Kubernetes Kube Proxy
@@ -280,7 +280,7 @@ EOF
 
 ### Start the Worker Services
 
-```
+```shell
 {
   sudo systemctl daemon-reload
   sudo systemctl enable containerd kubelet kube-proxy
@@ -296,14 +296,14 @@ EOF
 
 List the registered Kubernetes nodes:
 
-```
+```shell
 gcloud compute ssh controller-0 \
   --command "kubectl get nodes --kubeconfig admin.kubeconfig"
 ```
 
 > output
 
-```
+```shell
 NAME       STATUS   ROLES    AGE   VERSION
 worker-0   Ready    <none>   22s   v1.21.0
 worker-1   Ready    <none>   22s   v1.21.0

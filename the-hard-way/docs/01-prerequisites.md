@@ -16,7 +16,7 @@ Follow the Google Cloud SDK [documentation](https://cloud.google.com/sdk/) to in
 
 Verify the Google Cloud SDK version is 338.0.0 or higher:
 
-```
+```shell
 gcloud version
 ```
 
@@ -26,25 +26,25 @@ This tutorial assumes a default compute region and zone have been configured.
 
 If you are using the `gcloud` command-line tool for the first time `init` is the easiest way to do this:
 
-```
+```shell
 gcloud init
 ```
 
 Then be sure to authorize gcloud to access the Cloud Platform with your Google user credentials:
 
-```
+```shell
 gcloud auth login
 ```
 
 Next set a default compute region and compute zone:
 
-```
+```shell
 gcloud config set compute/region us-west1
 ```
 
 Set a default compute zone:
 
-```
+```shell
 gcloud config set compute/zone us-west1-c
 ```
 

@@ -10,7 +10,7 @@ Each kubeconfig requires a Kubernetes API Server to connect to. To support high 
 
 Generate a kubeconfig file suitable for authenticating as the `admin` user:
 
-```
+```shell
 {
   KUBERNETES_PUBLIC_ADDRESS=$(gcloud compute addresses describe kubernetes-the-hard-way \
     --region $(gcloud config get-value compute/region) \
@@ -37,26 +37,26 @@ Generate a kubeconfig file suitable for authenticating as the `admin` user:
 
 Check the version of the remote Kubernetes cluster:
 
-```
+```shell
 kubectl version
 ```
 
 > output
 
-```
+```json
 Client Version: version.Info{Major:"1", Minor:"21", GitVersion:"v1.21.0", GitCommit:"cb303e613a121a29364f75cc67d3d580833a7479", GitTreeState:"clean", BuildDate:"2021-04-08T16:31:21Z", GoVersion:"go1.16.1", Compiler:"gc", Platform:"linux/amd64"}
 Server Version: version.Info{Major:"1", Minor:"21", GitVersion:"v1.21.0", GitCommit:"cb303e613a121a29364f75cc67d3d580833a7479", GitTreeState:"clean", BuildDate:"2021-04-08T16:25:06Z", GoVersion:"go1.16.1", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
 List the nodes in the remote Kubernetes cluster:
 
-```
+```shell
 kubectl get nodes
 ```
 
 > output
 
-```
+```shell
 NAME       STATUS   ROLES    AGE     VERSION
 worker-0   Ready    <none>   2m35s   v1.21.0
 worker-1   Ready    <none>   2m35s   v1.21.0
