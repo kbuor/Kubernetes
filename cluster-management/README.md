@@ -18,62 +18,62 @@ printf "overlay\nbr_netfilter\n" >> /etc/modules-load.d/containerd.conf
 modprobe overlay
 modprobe br_netfilter
 ```
-> Lệnh đầu tiên thêm các module overlay và br_netfilter vào file cấu hình /etc/modules-load.d/containerd.conf để đảm bảo chúng sẽ được tải khi khởi động hệ thống.
+> Lệnh đầu tiên thêm các module overlay và br_netfilter vào file cấu hình `/etc/modules-load.d/containerd.conf` để đảm bảo chúng sẽ được tải khi khởi động hệ thống.
 
 > `modprobe overlay` và `modprobe br_netfilter` được sử dụng để tải ngay lập tức các module này vào kernel. Module overlay hỗ trợ hệ thống file overlayFS, cần thiết cho containerd, và module br_netfilter cho phép kiểm soát lưu lượng mạng giữa các container.
 
 - Cấu hình các thông số mạng hệ thống:
 
-bash
-Sao chép mã
+```shell
 printf "net.bridge.bridge-nf-call-iptables = 1\nnet.ipv4.ip_forward = 1\nnet.bridge.bridge-nf-call-ip6tables = 1\n" >> /etc/sysctl.d/99-kubernetes-cri.conf
 sysctl --system
-Dòng đầu tiên thêm các cấu hình liên quan đến mạng vào file /etc/sysctl.d/99-kubernetes-cri.conf:
-net.bridge.bridge-nf-call-iptables = 1: Cho phép iptables kiểm soát lưu lượng mạng qua các bridge.
-net.ipv4.ip_forward = 1: Cho phép chuyển tiếp IP, cần thiết để forward các gói IP giữa các mạng.
-net.bridge.bridge-nf-call-ip6tables = 1: Tương tự như iptables, nhưng cho IPv6.
-Lệnh sysctl --system áp dụng các thay đổi cấu hình sysctl mới.
-Cài đặt containerd:
+```
+> Thêm các cấu hình liên quan đến mạng vào file `/etc/sysctl.d/99-kubernetes-cri.conf`:
 
-bash
-Sao chép mã
+> `net.bridge.bridge-nf-call-iptables = 1`: Cho phép iptables kiểm soát lưu lượng mạng qua các bridge.
+
+> `net.ipv4.ip_forward = 1`: Cho phép chuyển tiếp IP, cần thiết để forward các gói IP giữa các mạng.
+
+> `net.bridge.bridge-nf-call-ip6tables = 1`: Tương tự như iptables, nhưng cho IPv6.
+
+- Cài đặt containerd:
+
+```shell
 wget https://github.com/containerd/containerd/releases/download/v1.7.13/containerd-1.7.13-linux-amd64.tar.gz -P /tmp/
 tar Cxzvf /usr/local /tmp/containerd-1.7.13-linux-amd64.tar.gz
 wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -P /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable --now containerd
-wget tải về file nén containerd-1.7.13-linux-amd64.tar.gz từ GitHub về thư mục /tmp/.
-Lệnh tar giải nén và cài đặt containerd vào /usr/local.
-Tiếp theo, tải file containerd.service về thư mục /etc/systemd/system/, đây là file cấu hình dịch vụ cho systemd.
-systemctl daemon-reload tải lại các cấu hình dịch vụ của systemd, sau đó systemctl enable --now containerd kích hoạt và khởi động containerd ngay lập tức.
-Cài đặt runc:
+```
 
-bash
-Sao chép mã
+- Cài đặt runc:
+
+```shell
 wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64 -P /tmp/
 install -m 755 /tmp/runc.amd64 /usr/local/sbin/runc
-wget tải về runc.amd64 từ GitHub về /tmp/.
-install -m 755 cài đặt runc vào /usr/local/sbin/, với quyền thực thi (755) cho file này. runc là một công cụ dòng lệnh để tạo và quản lý container theo tiêu chuẩn OCI.
-Cài đặt các plugin mạng CNI:
+```
 
-bash
-Sao chép mã
+- Cài đặt các plugin mạng CNI:
+
+```shell
 wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz -P /tmp/
 mkdir -p /opt/cni/bin
 tar Cxzvf /opt/cni/bin /tmp/cni-plugins-linux-amd64-v1.4.0.tgz
-wget tải về các plugin mạng CNI từ GitHub về /tmp/.
-Tạo thư mục /opt/cni/bin và giải nén các plugin vào đó. Các plugin này cung cấp các chức năng mạng cơ bản cho Kubernetes, như cấu hình địa chỉ IP, routing, và các quy tắc iptables.
-Cấu hình containerd:
+```
+> Tạo thư mục `/opt/cni/bin` và giải nén các plugin vào đó. Các plugin này cung cấp các chức năng mạng cơ bản cho Kubernetes, như cấu hình địa chỉ IP, routing, và các quy tắc iptables.
 
-bash
-Sao chép mã
+- Cấu hình containerd:
+
+```shell
 mkdir -p /etc/containerd
 containerd config default | tee /etc/containerd/config.toml
 vi /etc/containerd/config.toml
-137             SystemdCgroup = true
-Tạo thư mục cấu hình /etc/containerd.
-containerd config default | tee /etc/containerd/config.toml tạo file cấu hình mặc định cho containerd.
-Sử dụng vi để chỉnh sửa file /etc/containerd/config.toml, thay đổi giá trị SystemdCgroup thành true ở dòng 137 để containerd sử dụng cgroup của systemd, giúp quản lý tài nguyên hệ thống một cách hiệu quả hơn.
+```
+> Tạo thư mục cấu hình `/etc/containerd`.
+
+> `containerd config default | tee /etc/containerd/config.toml` tạo file cấu hình mặc định cho containerd.
+
+> Sử dụng `vi` để chỉnh sửa file `/etc/containerd/config.toml`, thay đổi giá trị `SystemdCgroup` thành `true` ở dòng 137 để containerd sử dụng cgroup của systemd, giúp quản lý tài nguyên hệ thống một cách hiệu quả hơn.
 
 
 ## Install Dependency
