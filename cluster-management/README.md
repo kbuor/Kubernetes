@@ -9,6 +9,29 @@ apt upgrade -y
 ```shell
 swapoff -a
 ```
+
+## Install Container Runtime
+printf "overlay\nbr_netfilter\n" >> /etc/modules-load.d/containerd.conf
+modprobe overlay
+modprobe br_netfilter
+printf "net.bridge.bridge-nf-call-iptables = 1\nnet.ipv4.ip_forward = 1\nnet.bridge.bridge-nf-call-ip6tables = 1\n" >> /etc/sysctl.d/99-kubernetes-cri.conf
+sysctl --system
+wget https://github.com/containerd/containerd/releases/download/v1.7.13/containerd-1.7.13-linux-amd64.tar.gz -P /tmp/
+tar Cxzvf /usr/local /tmp/containerd-1.7.13-linux-amd64.tar.gz
+wget https://raw.githubusercontent.com/containerd/containerd/main/containerd.service -P /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable --now containerd
+wget https://github.com/opencontainers/runc/releases/download/v1.1.12/runc.amd64 -P /tmp/
+install -m 755 /tmp/runc.amd64 /usr/local/sbin/runc
+wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz -P /tmp/
+mkdir -p /opt/cni/bin
+tar Cxzvf /opt/cni/bin /tmp/cni-plugins-linux-amd64-v1.4.0.tgz
+mkdir -p /etc/containerd
+containerd config default | tee /etc/containerd/config.toml
+vi /etc/containerd/config.toml
+137             SystemdCgroup = true
+
+
 ## Install Dependency
 
 > Dependency need to install: docker, kubeadm, kubelet
