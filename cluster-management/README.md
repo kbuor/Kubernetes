@@ -80,48 +80,38 @@ vi /etc/containerd/config.toml
 
 > Dependency need to install: docker, kubeadm, kubelet
 
-- Add GPG key for Docker repository
-```shell
-apt-get install ca-certificates curl gnupg lsb-release
-sudo mkdir -m 0755 -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-```
-- Add Docker repository
-```shell
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-```
 - Add GPG key for Kubernetes repository
 ```shell
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+apt-get install ca-certificates curl gnupg lsb-release apt-transport-https gpg
+sudo mkdir -m 0755 -p /etc/apt/keyrings
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 ```
 - Add Kubernetes repository
 ```shell
-cat << EOF | tee /etc/apt/sources.list.d/kubernetes.list
-deb https://apt.kubernetes.io/ kubernetes-xenial main
-EOF
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 ```
+
 - Update repository
 ```shell
 apt update -y
+reboot
 ```
 - Install dependency components
 ```shell
-apt install -y docker.io kubelet kubeadm kubectl
+apt install -y kubelet=1.29.1-1.1 kubeadm=1.29.1-1.1 kubectl=1.29.1-1.1
 ```
 - Hold Kubernetes components version
 ```shell
-apt-mark hold docker kubelet kubeadm
+apt-mark hold kubelet kubeadm kubectl
 ```
 - Enable `kubelet` service
 ```shell
-systemctl enable kubelet
+systemctl enable --now kubelet
 ```
 ## Bootstraping Master
 - Bootstraping master using `kubeadm`
 ```shell
-kubeadm init --pod-network-cidr=192.168.0.0/16
+kubeadm init --pod-network-cidr 192.168.0.0/16 --kubernetes-version 1.29.1 --node-name k8s-master --apiserver-cert-extra-sans 103.141.177.132 --apiserver-cert-extra-sans k8s.kbuor.tech --apiserver-cert-extra-sans k8s-master
 ```
 - Configure token
 ```shell
@@ -131,8 +121,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 - Apply overlay networking
 ```shell
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/tigera-operator.yaml
-kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/custom-resources.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/custom-resources.yaml
 ```
 ## Optional command
 - Get node information
