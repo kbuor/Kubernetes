@@ -7,7 +7,9 @@ apt update -y
 - Disable Swap
 ```shell
 swapoff -a
+vi /etc/fstab
 ```
+> Remove `swap` from `/etc/fstab` file
 
 ## Install Container Runtime
 - Tải các module kernel cần thiết:
