@@ -3,7 +3,6 @@
 - Update linux repository
 ```shell
 apt update -y
-apt upgrade -y
 ```
 - Disable Swap
 ```shell
