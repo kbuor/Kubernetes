@@ -349,7 +349,7 @@ kubeadm upgrade plan
 > Run the recommand command receive from upgrade plan
 
 ```shell
-kubeadm apply plan
+kubeadm upgrade apply <plan>
 ```
 
 ## Upgrade `kubelet` package
@@ -397,7 +397,7 @@ kubectl version --short
 
 > Cordon the Node using `kubectl` command
 ```shell
-kubectl cordon node k8s-node-01
+kubectl cordon k8s-node-01
 ```
 
 ## Drain the Node
@@ -430,7 +430,7 @@ apt-mark hold kubectl
 
 > UnCordon the Node using `kubectl` command
 ```shell
-kubectl uncordon node k8s-node-01
+kubectl uncordon k8s-node-01
 ```
 > Check current version of `kubeadm`
 ```shell
