@@ -357,7 +357,7 @@ kubeadm apply plan
 > Upgrade `kubelet` package
 ```shell
 apt-mark unhold kubelet
-apt install -y kubeadm=1.27.3-00
+apt install -y kubelet=1.27.3-00
 apt-mark hold kubelet
 ```
 
@@ -413,7 +413,7 @@ kubectl drain k8s-node-01
 > Upgrade `kubelet` package
 ```shell
 apt-mark unhold kubelet
-apt install -y kubeadm=1.27.3-00
+apt install -y kubelet=1.27.3-00
 apt-mark hold kubelet
 ```
 
