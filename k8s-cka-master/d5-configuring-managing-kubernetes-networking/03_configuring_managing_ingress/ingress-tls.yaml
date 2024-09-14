@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-tls
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+      - training.hungtran.net
+    secretName: tls-secret
+  rules:
+  - host: training.hungtran.net
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-world-service-single
+            port:
+              number: 80
