@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
   - ReadWriteOnce
-  storageClassName: faster
+  storageClassName: standard
   resources:
     requests:
       storage: 10Gi
@@ -27,7 +27,7 @@ spec:
       volumes:
       - name: webcontent
         persistentVolumeClaim:
-          claimName: my-volume
+          claimName: pvc-managed
       containers:
       - name: nginx
         image: nginx
