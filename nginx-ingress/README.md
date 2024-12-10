@@ -47,3 +47,29 @@ spec:
     targetPort: 5678
   type: ClusterIP
 ```
+```shell
+kubectl apply -f app.yaml
+```
+
+> Create Ingress Resource (`ingress.yaml`):
+```shell
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-service
+            port:
+              number: 80
+```
