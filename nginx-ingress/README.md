@@ -1,3 +1,38 @@
+## DEPLOY METALLB
+---
+> Deploy MetalLB
+```shell
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/manifests/metallb-native.yaml
+```
+
+> Deploy MetalLB CRD
+```shell
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/config/crd/bases/metallb.io_ipaddresspools.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/config/crd/bases/metallb.io_l2advertisements.yaml
+```
+
+> Configure MetalLB
+```shell
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: metallb-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.20.30.200-10.20.30.210  # Dải IP được chọn
+---
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-advertisement
+  namespace: metallb-system
+spec: {}
+```
+```shell
+kubectl apply -f metallb-config.yaml
+```
+
 > Setup NGINX ingress by Helm
 ```shell
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
