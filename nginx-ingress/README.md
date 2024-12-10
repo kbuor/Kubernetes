@@ -11,7 +11,12 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/config/c
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/config/crd/bases/metallb.io_l2advertisements.yaml
 ```
 
-> Configure MetalLB
+> Configure MetalLB (`metallb-config.yaml`):
+
+```shell
+kubectl create namespace metallb-system
+```
+
 ```shell
 apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
