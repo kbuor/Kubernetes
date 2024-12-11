@@ -2,7 +2,7 @@
 ---
 > Deploy MetalLB
 ```shell
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/main/manifests/metallb-native.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/refs/heads/main/config/manifests/metallb-native.yaml
 ```
 
 > Deploy MetalLB CRD
